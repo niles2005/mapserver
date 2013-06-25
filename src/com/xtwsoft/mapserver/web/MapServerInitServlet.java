@@ -11,16 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Servlet implementation class TockWorkInitServlet
+ * Servlet implementation class ServerInitServlet
  */
 @WebServlet(name = "InitServlet", urlPatterns = { "/ServerInitServlet" }, loadOnStartup=1)
 public class MapServerInitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	
-	
-	
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
