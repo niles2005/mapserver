@@ -4,6 +4,7 @@ import java.io.File;
 
 public class ServerConfig {
 	private static ServerConfig m_instance = null;
+	private File m_appPath = null;
 	private ServerConfig(File appPath) {
 		m_appPath = appPath;
 	}
