@@ -45,12 +45,16 @@ public class WorkServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		ServletOutputStream sos = response.getOutputStream();
 		response.setContentType("text/html; charset=UTF-8");
-		
 		String retInfo = null;
 		if(ServerConfig.getInstance() == null) {
 			retInfo = WebUtil.error("init error!");
 		} else {
-			retInfo = doWork(request);
+			try {
+				retInfo = WorkManager.getInstance().doWork(request,response);
+			} catch(Exception ex) {
+				ex.printStackTrace();
+				retInfo = WebUtil.error("Exception:" + ex.getMessage());
+			}
 		}
 		
 		if(retInfo != null) {
@@ -63,11 +67,5 @@ public class WorkServlet extends HttpServlet {
 			
 			sos.write(retInfo.getBytes("UTF-8"));
 		}
-	}
-	
-	private String doWork(HttpServletRequest request) {
-		String action = request.getParameter("action");
-		String id = WebUtil.getUTFString(request,"id");
-		return WorkManager.getInstance().doWork(id, action);
 	}
 }

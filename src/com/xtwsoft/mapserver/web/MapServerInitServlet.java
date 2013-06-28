@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xtwsoft.mapserver.template.TemplateManager;
+
 
 /**
  * Servlet implementation class ServerInitServlet
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MapServerInitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,6 +36,7 @@ public class MapServerInitServlet extends HttpServlet {
 			if(ServerConfig.getInstance() == null) {
 				System.err.println("init server error!");
 			}
+			TemplateManager.initInstance();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -51,5 +55,4 @@ public class MapServerInitServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
 }
