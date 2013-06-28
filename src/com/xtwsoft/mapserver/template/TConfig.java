@@ -11,6 +11,7 @@ import java.io.File;
 import com.xtwsoft.mapserver.commons.xml.XmlItem;
 import com.xtwsoft.mapserver.commons.xml.XmlProperty;
 import com.xtwsoft.mapserver.commons.xml.XmlRoot;
+import com.xtwsoft.mapserver.web.WebUtil;
 
 public class TConfig extends XmlRoot {
 	private boolean m_isValid = false;
@@ -57,8 +58,78 @@ public class TConfig extends XmlRoot {
 		m_isValid = true;
     }
     
+    public TItem findItem(String[] nodeNameArray) {
+    	for(int i=0;i<this.m_subList.size();i++) {
+    		TGroup group = (TGroup)m_subList.get(i);
+    		if(group.getName().equals(nodeNameArray[0])) {
+    			return group.findItem(nodeNameArray,1);
+    		}
+    	}
+    	return null;
+    }
+    
     public String getTemplateInfoJSON() {
     	return "{\"name\":\"" + this.getFileName() + "\",\"id\":\"" + this.getId() + "\"}";
+    }
+    
+    public String deleteNode(String nodeName) {
+    	if(nodeName == null) {
+    		return WebUtil.error("node name is null!"); 
+    	}
+//    	String[] strs = nodeName.split(".");
+//    	TItem item = findItem(strs);
+//    	if(item != null) {
+//    		
+//    	}
+    	String status = "ok";
+    	String message = "";
+    	String ss = "{\"status\":\"" + status + "\"";
+    	if(message.length() != 0) {
+    		ss += ",\"message\":\"" + message + "\"}";
+    	} else {
+    		ss += "}";
+    	}
+    	return ss;
+    }
+    
+    public String addNode(String nodeName) {
+    	if(nodeName == null) {
+    		return WebUtil.error("node name is null!"); 
+    	}
+    	String[] strs = nodeName.split(".");
+    	TItem item = findItem(strs);
+    	if(item != null) {
+    		
+    	}
+    	String status = "ok";
+    	String message = "";
+    	String ss = "{\"status\":\"" + status + "\"";
+    	if(message.length() != 0) {
+    		ss += ",\"message\":\"" + message + "\"}";
+    	} else {
+    		ss += "}";
+    	}
+    	return ss;
+    }
+    
+    public String renameNode(String nodeName) {
+    	if(nodeName == null) {
+    		return WebUtil.error("node name is null!"); 
+    	}
+    	String[] strs = nodeName.split(".");
+    	TItem item = findItem(strs);
+    	if(item != null) {
+    		
+    	}
+    	String status = "ok";
+    	String message = "";
+    	String ss = "{\"status\":\"" + status + "\"";
+    	if(message.length() != 0) {
+    		ss += ",\"message\":\"" + message + "\"}";
+    	} else {
+    		ss += "}";
+    	}
+    	return ss;
     }
     
     public static void main(String[] args) {

@@ -55,6 +55,22 @@ public class TItem extends XmlItem {
 	public void afterSetProperty() {
 	}
 	
+    public TItem findItem(String[] nodeNameArray,int index) {
+    	for(int i=0;i<this.m_subList.size();i++) {
+    		Object item = m_subList.get(i);
+    		if(item instanceof TItem) {
+    			TItem theItem = (TItem)item;
+        		if(theItem.getName().equals(nodeNameArray[index])) {
+        			if(index == nodeNameArray.length - 1) {
+        				return theItem;
+        			}
+        			return theItem.findItem(nodeNameArray, index + 1);
+        		}
+    		}
+    	}
+    	return null;
+    }
+	
     public int compareTo(XmlItem item) {
     	TItem other = (TItem)item;
     	return this.getName().compareTo(other.getName());

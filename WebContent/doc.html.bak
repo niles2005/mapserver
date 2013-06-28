@@ -241,7 +241,7 @@
 
 
       <p id="file">
-        <b class="header">file</b><code>http://127.0.0.1:8080/mapflow/work?module=template&action=content&name=new.xml</code>
+        <b class="header">file</b><code>http://127.0.0.1:8080/mapflow/work?module=template&action=list&name=new.xml</code>
         <br><span class="alias">Return: <b>Text(xml)</b></span>
         <pre>&lt;config id="TC_15021407"&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;group name="area"&gt;

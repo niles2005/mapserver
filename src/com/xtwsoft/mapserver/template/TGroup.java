@@ -34,4 +34,18 @@ public class TGroup extends XmlItem {
 
 	public void afterSetProperty() {
 	}
+	
+    public TItem findItem(String[] nodeNameArray,int index) {
+    	for(int i=0;i<this.m_subList.size();i++) {
+    		TItem item = (TItem)m_subList.get(i);
+    		if(item.getName().equals(nodeNameArray[index])) {
+    			if(index == nodeNameArray.length - 1) {
+    				return item;
+    			}
+    			item.findItem(nodeNameArray, index + 1);
+    		}
+    	}
+    	return null;
+    }
+	
 }

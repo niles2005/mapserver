@@ -3,6 +3,7 @@ package com.xtwsoft.mapserver.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xtwsoft.mapserver.template.TConfig;
 import com.xtwsoft.mapserver.template.TemplateManager;
 
 
@@ -19,19 +20,17 @@ public class WorkManager {
 	}
 	
 	public String doWork(HttpServletRequest request, HttpServletResponse response) {
-		String action = request.getParameter("action");
-		if(action == null) {
-			return WebUtil.error("unknown action!");
+		String module = request.getParameter("module");
+		if(module == null) {
+			return WebUtil.error("unknown module!");
 		}
-		if(action.equals("template.list")) {
-			return TemplateManager.getInstance().listTemplatesJSON();
-		} else if(action.startsWith("template.file.")) {
-			response.setContentType("application/xml");
-			String fileName = action.substring(14);
-			return TemplateManager.getInstance().getTemplateContent(fileName);
+		if("template".equals(module)) {
+			return TemplateManager.getInstance().doModuleWork(request,response);
+		} else {
+			
 		}
-		
 		return null;
 	}
+	
 	
 }
