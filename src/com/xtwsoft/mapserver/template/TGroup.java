@@ -42,7 +42,7 @@ public class TGroup extends XmlItem {
     			if(index == nodeNameArray.length - 1) {
     				return item;
     			}
-    			item.findItem(nodeNameArray, index + 1);
+    			return item.findItem(nodeNameArray, index + 1);
     		}
     	}
     	return null;

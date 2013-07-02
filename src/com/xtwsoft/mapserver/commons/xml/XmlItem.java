@@ -129,15 +129,16 @@ public abstract class XmlItem implements Comparable<XmlItem> {
         m_subList.add(subItem);
     }
 
-    public void removeSubItem(XmlItem subItem) {
+    public boolean removeSubItem(XmlItem subItem) {
         subItem.m_parentItem = null;
-        m_subList.remove(subItem);
+        return m_subList.remove(subItem);
     }
 
-    public void removeFromParent() {
+    public boolean removeFromParent() {
         if(m_parentItem != null) {
-            m_parentItem.removeSubItem(this);
+            return m_parentItem.removeSubItem(this);
         }
+        return false;
     }
 
     public ArrayList getSubList() {

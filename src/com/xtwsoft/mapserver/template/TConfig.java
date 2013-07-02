@@ -76,20 +76,14 @@ public class TConfig extends XmlRoot {
     	if(nodeName == null) {
     		return WebUtil.error("node name is null!"); 
     	}
-//    	String[] strs = nodeName.split(".");
-//    	TItem item = findItem(strs);
-//    	if(item != null) {
-//    		
-//    	}
-    	String status = "ok";
-    	String message = "";
-    	String ss = "{\"status\":\"" + status + "\"";
-    	if(message.length() != 0) {
-    		ss += ",\"message\":\"" + message + "\"}";
-    	} else {
-    		ss += "}";
+    	String[] strs = nodeName.split("\\.");
+    	TItem item = findItem(strs);
+    	if(item != null) {
+    		if(item.removeFromParent()) {
+    			return WebUtil.oKJSON();
+    		}
     	}
-    	return ss;
+    	return WebUtil.failedJSON("delete node:" + nodeName + " failed!");
     }
     
     public String addNode(String nodeName) {
@@ -116,20 +110,23 @@ public class TConfig extends XmlRoot {
     	if(nodeName == null) {
     		return WebUtil.error("node name is null!"); 
     	}
-    	String[] strs = nodeName.split(".");
+    	System.err.println(nodeName);
+    	int pos = nodeName.lastIndexOf("^");
+    	String newName = null;
+    	if(pos != -1) {
+    		newName = nodeName.substring(pos + 1);
+    		nodeName = nodeName.substring(0,pos);
+    	} else {
+    		return WebUtil.failedJSON("rename node:" + nodeName + " failed,new name is not exist!");
+    	}
+    	
+    	String[] strs = nodeName.split("\\.");
     	TItem item = findItem(strs);
     	if(item != null) {
-    		
+    		item.setName(newName);
+    		return WebUtil.oKJSON();
     	}
-    	String status = "ok";
-    	String message = "";
-    	String ss = "{\"status\":\"" + status + "\"";
-    	if(message.length() != 0) {
-    		ss += ",\"message\":\"" + message + "\"}";
-    	} else {
-    		ss += "}";
-    	}
-    	return ss;
+    	return WebUtil.failedJSON("rename node:" + nodeName + " failed!");
     }
     
     public static void main(String[] args) {

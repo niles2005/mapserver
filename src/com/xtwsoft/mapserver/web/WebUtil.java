@@ -15,6 +15,16 @@ public class WebUtil {
 		return "{\"warnning\":\"" + info + "\"}";
 	}
 
+	public static String failedJSON(String message) {
+    	String ss = "{\"status\":\"failed\",\"message\":\"";
+    	ss += message + "\"}";
+    	return ss;
+	}
+	
+	public static String oKJSON() {
+    	return "{\"status\":\"OK\"}";
+	}
+	
 	public static String getUTFString(HttpServletRequest request,String name) {
 		try {
 			String value = request.getParameter(name);
