@@ -115,6 +115,9 @@ public class TemplateManager {
 		} else if("rename".equals(action)) {//rename tree node name
 			String nodeName = request.getParameter("node");
 			return tempConfig.renameNode(nodeName);
+		} else if("move".equals(action)) {//move tree node name
+			String nodeName = request.getParameter("node");
+			return tempConfig.moveNode(nodeName);
 		}
 		return null;
 	}
