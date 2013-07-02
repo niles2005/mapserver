@@ -2,8 +2,8 @@ var fs = require('fs'),
 	path = require('path'),
 	util = require('util');
 	
-var srcPath = 'D:\\mywork\\mapserver\\workspace\\mapserver\\build\\classes';
-var destPath = 'E:\\apache-tomcat-7.0.29\\webapps\\mapflow\\WEB-INF\\classes';
+var srcPath = 'D:\\workspace\\mapserver\\build\\classes';
+var destPath = 'D:\\apache-tomcat-7.0.40\\webapps\\mapflow\\WEB-INF\\classes';
 
 removeDir(destPath);
 
