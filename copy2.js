@@ -1,6 +1,5 @@
 var fs = require('fs'),
-	path = require('path'),
-	util = require('util');
+	path = require('path');
 	
 var srcPath = 'D:\\workspace\\mapserver\\build\\classes';
 var destPath = 'D:\\apache-tomcat-7.0.40\\webapps\\mapflow\\WEB-INF\\classes';
@@ -67,6 +66,6 @@ function copyFile(file,destPath) {
 	if(fs.statSync(file).isFile()) {
 		var is = fs.createReadStream(file);
 		var os = fs.createWriteStream(destPath);
-		util.pump(is,os)
+		is.pipe(os)
 	}
 }
