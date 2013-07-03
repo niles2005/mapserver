@@ -8,11 +8,10 @@ var gitConfig = {
 		'destPath': 'E:\\apache-tomcat-7.0.29\\webapps\\mapflow\\WEB-INF\\classes'
 	},
 	'rayzang8': {
-		'srcPath': 'D:\\workspace\\mapserver\\build\\classes',
-		'destPath': 'D:\\apache-tomcat-7.0.40\\webapps\\mapflow\\WEB-INF\\classes'
+		'srcPath': 'D:\\mywork\\mapserver\\workspace\\mapserver\\build\\classes',
+		'destPath': 'E:\\apache-tomcat-7.0.29\\webapps\\mapflow\\WEB-INF\\classes'
 	}
 }
-
 
 var gitConfigFile = '.git/config';
 
