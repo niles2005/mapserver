@@ -14,7 +14,7 @@ var gitConfig = {
 }
 
 
-var gitConfigFile = '.git/config';
+var gitConfigFile = '.git/gituser.txt';
 
 fs.exists(gitConfigFile, function(exists) {
 	if (exists) {
@@ -24,33 +24,18 @@ fs.exists(gitConfigFile, function(exists) {
 			if (err) {
 				throw err;
 			}
-			var arr = data.split('\n');
-			for (var k in arr) {
-				//SSH  git@github.com:gitUser/test.git
-				//HTTPS  https://github.com/gitUser/test.git
-				//Subversion  https://github.com/gitUser/test
-				if (strUtil.contains(arr[k], 'github.com')) {
-					arr[k] = 'https://github.com/niles2005/mapserver.git';
-					var pos0 = arr[k].indexOf('github.com');
-					var pos1 = arr[k].indexOf('/', pos0 + 11);
-					if (pos0 > 0 && pos1 > pos0) {
-						var gitUser = arr[k].substring(pos0 + 11, pos1);
-						var thePath = gitConfig[gitUser];
-						// console.log(thePath)
-						if(thePath) {
-							var destPath = thePath.destPath;
-							var srcPath = thePath.srcPath;
-							removeDir(destPath);
-							copyDir(srcPath, destPath);
-							console.log("copy successed!");
-						} else {
-							console.log("failed,can not find git user!");
-						}
-
-					}
-				}
+			var thePath = gitConfig[data];
+			// console.log(thePath)
+			if(thePath) {
+				var destPath = thePath.destPath;
+				var srcPath = thePath.srcPath;
+				removeDir(destPath);
+				copyDir(srcPath, destPath);
+				console.log("copy successed!");
+			} else {
+				console.log("failed,can not find git user!");
 			}
-			// console.log(data);
+
 		});
 	}
 });
