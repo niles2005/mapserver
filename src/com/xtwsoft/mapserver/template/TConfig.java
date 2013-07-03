@@ -90,15 +90,24 @@ public class TConfig extends XmlRoot {
     	if(nodeName == null) {
     		return WebUtil.error("node name is null!"); 
     	}
-    	String[] strs = nodeName.split(".");
+    	String[] strs = nodeName.split("\\.");
     	TItem item = findItem(strs);
     	if(item != null) {
-    		TItem newItem = new TItem();
-    		newItem.setName(nodeName);
-    		item.addSubItem(newItem);
-    		return WebUtil.oKJSON();
+    		return WebUtil.failedJSON("add node:" + nodeName + " failed,node is exists!");
     	}
-    	return WebUtil.failedJSON("add node:" + nodeName + " failed!");
+    	String newNodeName = strs[strs.length - 1];
+    	String[] newStrs = new String[strs.length - 1];
+    	for(int i=0;i<strs.length -1;i++) {
+    		newStrs[i] = strs[i];
+    	}
+    	item = findItem(newStrs);
+    	if(item == null) {
+    		return WebUtil.failedJSON("add node:" + nodeName + " failed,parent node is not exists!");
+    	}
+		TItem newItem = new TItem();
+		newItem.setName(newNodeName);
+		item.addSubItem(newItem);
+		return WebUtil.oKJSON();
     }
     
     public String renameNode(String nodeName) {
