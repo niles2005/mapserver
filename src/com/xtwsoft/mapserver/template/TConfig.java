@@ -2,7 +2,7 @@
  * Copyright(c) 2010 XTWSoft, Inc.
  *
  * @author NieLei E-mail:niles2010@live.cn
- * @version create time£º2010-8-3 ÏÂÎç08:55:56
+ * @version create timeï¿½ï¿½2010-8-3 ï¿½ï¿½ï¿½ï¿½08:55:56
  */
 package com.xtwsoft.mapserver.template;
 
@@ -90,7 +90,7 @@ public class TConfig extends XmlRoot {
     	if(nodeName == null) {
     		return WebUtil.error("node name is null!"); 
     	}
-    	String[] strs = nodeName.split(".");
+    	String[] strs = nodeName.split("\\.");
     	TItem item = findItem(strs);
     	if(item != null) {
     		TItem newItem = new TItem();

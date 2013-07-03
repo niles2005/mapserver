@@ -66,6 +66,6 @@ function copyFile(file,destPath) {
 	if(fs.statSync(file).isFile()) {
 		var is = fs.createReadStream(file);
 		var os = fs.createWriteStream(destPath);
-		is.pipe(os)
+		is.pipe(os);
 	}
 }
