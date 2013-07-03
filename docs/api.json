@@ -5,12 +5,14 @@
 		"items": [{
 				"name": "list",
 				"code": "http://127.0.0.1/mapflow/work?module=template&action=list",
-				"ret": "JSON",
+				"rettype": "JSON",
+				"retcontent": "{\"status\":\"ok\"}",
 				"info": "[{\"name\":\"new2.xml\",\"id\":\"TC_21132756\"},{\"name\":\"new.xml\",\"id\":\"TC_15021407\"}]</pre>返回当前服务端支持的所有template列表。对于每个template，显示name，id属性。<br>当服务端集合为空时，返回空集合: []"
 			}, {
 				"name": "file",
 				"code": "http://127.0.0.1/mapflow/work?module=template&action=content&name=new.xml",
-				"ret": "Text(xml)",
+				"rettype": "Text(xml)",
+				"retcontent": "{\"status\":\"ok\"}",
 				"info": "<config id=\"TC_15021407\"><br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;group name=\"area\"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;item name=\"base\"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;field name=\"exist\" value=\"1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;field name=\"simplifypixel\" value=\"1.5|1.2| 0.8|0.8|0.8|0.7|0.6| 0.5|0.5|0.4|0.4|0.3| 0.3|0.3|0.2|0.2|0.2| 0.1|0.1|0.1\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;field name=\"showpixel\" value=\"1|1| 1|1|1|1|1| 1|1|1|1|1| 1|1|1|1|1| 1|1|1\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;field name=\"showriverwidth\" value=\"0.4\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;field name=\"shownamerange\" value=\"50|50| 50|50|50|50|50| 50|50|50|50|50| 50|50|50|50|50| 0|0|0\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;item name=\"waterway\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;item name=\"tourism\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;item name=\"sport\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;item name=\"shop\"/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;item name=\"railway\"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..."
 			}
 		]
