@@ -12,6 +12,7 @@ var part1 = doc1.split('\r\n');
 var part2 = doc2.slice('\r\n');
 var part3 = doc3.slice('\r\n');
 
+
 var items = api[0]["items"];
 var titlePart = [];
 titlePart.push("<ul class=\"toc_section\">");
@@ -34,8 +35,12 @@ __.each(items,function(item){
 var total = part1.concat(titlePart).concat(part2).concat(contentPart).concat(part3);
 var newDoc = total.join("\r\n");
 
-console.log(newDoc);
+// console.log(newDoc);
 
-var fileWriteStream = fs.createWriteStream('./newDoc.html');
-fileWriteStream.write(newDoc);
+// var fileWriteStream = fs.createWriteStream('./newDoc.html');
+// fileWriteStream.write(newDoc);
+
+fs.writeFileSync('./newDoc1.html', doc1, 'utf8');
+fs.appendFileSync('./newDoc1.html',doc2,'utf8');
+fs.appendFileSync('./newDoc1.html',doc3,'utf8');
 //newDoc.pipe(fileWriteStream);
