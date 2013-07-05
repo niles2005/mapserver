@@ -3,7 +3,7 @@ package com.xtwsoft.mapserver.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xtwsoft.mapserver.template.TConfig;
+import com.xtwsoft.mapserver.project.ProjectManager;
 import com.xtwsoft.mapserver.template.TemplateManager;
 
 
@@ -26,8 +26,8 @@ public class WorkManager {
 		}
 		if("template".equals(module)) {
 			return TemplateManager.getInstance().doModuleWork(request,response);
-		} else {
-			
+		} else if("project".equals(module)) {
+			return ProjectManager.getInstance().doModuleWork(request,response);
 		}
 		return null;
 	}

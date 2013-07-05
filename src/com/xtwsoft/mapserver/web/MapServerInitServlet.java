@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xtwsoft.mapserver.project.ProjectManager;
 import com.xtwsoft.mapserver.template.TemplateManager;
 
 
@@ -37,6 +38,8 @@ public class MapServerInitServlet extends HttpServlet {
 				System.err.println("init server error!");
 			}
 			TemplateManager.initInstance();
+			
+			ProjectManager.initInstance();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
