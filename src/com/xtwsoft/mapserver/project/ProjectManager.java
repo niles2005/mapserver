@@ -61,15 +61,15 @@ public class ProjectManager {
 		}
 	}
 	
-	public String doModuleWork(HttpServletRequest request, HttpServletResponse response) {
-		String action = request.getParameter("action");
-		if(action == null) {
-			return WebUtil.error("unknown action!");
-		}
-		if("list".equals(action)) {
-			return listProjectJSON();
-		} 
-
-		return null;
-	}
+//	public String doModuleWork(HttpServletRequest request, HttpServletResponse response) {
+//		String action = request.getParameter("action");
+//		if(action == null) {
+//			return WebUtil.error("unknown action!");
+//		}
+//		if("list".equals(action)) {
+//			return listProjectJSON();
+//		} 
+//
+//		return null;
+//	}
 }

@@ -12,10 +12,23 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.xtwsoft.mapserver.project.Project;
 import com.xtwsoft.mapserver.project.ProjectManager;
+import com.xtwsoft.mapserver.template.TemplateManager;
 
 public class RestFilter implements Filter {
-	private WorkServlet m_workServlet = new WorkServlet();
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig filterConfig) throws ServletException {
+		try {
+			String realPath = filterConfig.getServletContext().getRealPath("");
+			ServerConfig.initInstance(realPath);
+			
+			if(ServerConfig.getInstance() == null) {
+				System.err.println("init server error!");
+			}
+			TemplateManager.initInstance();
+			
+			ProjectManager.initInstance();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse res,
@@ -48,9 +61,10 @@ public class RestFilter implements Filter {
 				return;
 			}
 		} else if("POST".equals(method)) {
-			m_workServlet.service(req, res);
+			chain.doFilter(req, res);
+//			m_workServlet.service(req, res);
 		} else {
-			m_workServlet.service(req, res);
+			chain.doFilter(req, res);
 		}
 		
 	}
