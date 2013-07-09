@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class Params {
+	private boolean m_initJson = false;
 	private JsonObject m_json = null;
 	private HttpServletRequest m_request = null;
 	private HttpServletResponse m_response = null;
@@ -17,30 +18,44 @@ public class Params {
 		try {
 			m_request = request;
 			m_response = response;
-			BufferedReader reader = request.getReader();
-			String str = reader.readLine();
-			if(str == null) {
-				return;
-			}
-			StringBuilder strBuff = new StringBuilder();
-			while(str != null) {
-				strBuff.append(str);
-				str = reader.readLine();
-			}
-
-			JsonParser parser = new JsonParser();
-			m_json = (JsonObject) parser.parse(strBuff.toString());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
+	//lazy init
+	private void initJson() {
+		if(!m_initJson) {
+			try {
+				m_initJson = true;
+				BufferedReader reader = m_request.getReader();
+				String str = reader.readLine();
+				if(str == null) {
+					return;
+				}
+				StringBuilder strBuff = new StringBuilder();
+				while(str != null) {
+					strBuff.append(str);
+					str = reader.readLine();
+				}
+
+				JsonParser parser = new JsonParser();
+				m_json = (JsonObject) parser.parse(strBuff.toString());
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
 	public String getValue(String name) {
 		String value = m_request.getParameter(name);
-		if(value == null && m_json != null) {
-			JsonElement jsonElement = m_json.get(name);
-			if(jsonElement != null) {
-				value = jsonElement.getAsString();
+		if(value == null) {
+			initJson();
+			if(m_json != null) {
+				JsonElement jsonElement = m_json.get(name);
+				if(jsonElement != null) {
+					value = jsonElement.getAsString();
+				}
 			}
 		}
 		return value;

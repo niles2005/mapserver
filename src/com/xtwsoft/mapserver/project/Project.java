@@ -1,5 +1,6 @@
 package com.xtwsoft.mapserver.project;
 
+import java.io.File;
 import java.util.Date;
 
 public class Project {
@@ -66,6 +67,14 @@ public class Project {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	
+	public File getFilePath() {
+		return null;
+	}
+	
+	public String listFiles() {
+		return null;
 	}
 	
 }
