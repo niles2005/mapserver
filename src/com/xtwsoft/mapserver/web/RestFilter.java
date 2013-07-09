@@ -41,7 +41,7 @@ public class RestFilter implements Filter {
 					request.getContextPath(), "");
 
 			
-			System.err.println(realUrl);
+//			System.err.println(realUrl);
 			if(realUrl.startsWith("/")) {
 				if(realUrl.length() == 1) {
 					chain.doFilter(req, res);
