@@ -38,7 +38,6 @@ public class Params {
 					strBuff.append(str);
 					str = reader.readLine();
 				}
-
 				JsonParser parser = new JsonParser();
 				m_json = (JsonObject) parser.parse(strBuff.toString());
 			} catch(Exception ex) {
