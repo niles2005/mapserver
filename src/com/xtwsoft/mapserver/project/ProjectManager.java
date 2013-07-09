@@ -22,6 +22,7 @@ public class ProjectManager {
 			if(m_projects == null) {
 				m_projects = new Projects();
 			}
+			m_projects.doInit();
 			System.err.println("projects number:" + this.m_projects.getProjects().size());
 			
 		} catch(Exception ex) {
