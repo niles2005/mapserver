@@ -7,11 +7,13 @@ public class ServerConfig {
 	private File m_appPath = null;
 	private File m_WEBINFPath = null;
 	private File m_datasPath = null;
+	private File m_configPath = null;
 	private ServerConfig(File appPath) {
 		m_appPath = appPath;
 		m_WEBINFPath = new File(appPath,"WEB-INF");
 		if(m_WEBINFPath.exists()) {
 			m_datasPath = new File(m_WEBINFPath,"datas");
+			m_configPath = new File(m_WEBINFPath,"config");
 		} else {
 			System.err.println("WEB-INF path not found!");
 		}
@@ -31,5 +33,9 @@ public class ServerConfig {
 	
 	public File getDatasPath() {
 		return m_datasPath;
+	}
+
+	public File getConfigPath() {
+		return m_configPath;
 	}
 }

@@ -7,6 +7,10 @@ public class WebUtil {
 		return "{\"error\":\"" + info + "\"}";
 	}
 	
+	public static String exception(Exception ex) {
+		return "{\"exception\":\"" + ex.getMessage() + "\"}";
+	}
+	
 	public static String success(String info) {
 		return "{\"success\":\"" + info + "\"}";
 	}

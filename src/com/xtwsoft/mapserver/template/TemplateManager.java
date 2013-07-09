@@ -87,39 +87,39 @@ public class TemplateManager {
 		return m_confitHash.get(name);
 	}
 	
-	public String doModuleWork(HttpServletRequest request, HttpServletResponse response) {
-		String action = request.getParameter("action");
-		if(action == null) {
-			return WebUtil.error("unknown action!");
-		}
-		if("list".equals(action)) {
-			return listTemplatesJSON();
-		} 
-		String name = request.getParameter("name");
-		if(name == null) {
-			return WebUtil.error("unknown file name!");
-		}
-		TConfig tempConfig = getTemplateConfig(name);
-		if(tempConfig == null) {
-			return WebUtil.error("can not find template:" + name + "!");
-		}
-		if("content".equals(action)) {
-			response.setContentType("application/xml");
-			return tempConfig.getXMLContent();
-		} else if("delete".equals(action)) {//delete tree node
-			String nodeName = request.getParameter("node");
-			return tempConfig.deleteNode(nodeName);
-		} else if("add".equals(action)) {//add tree node
-			String nodeName = request.getParameter("node");
-			return tempConfig.addNode(nodeName);
-		} else if("rename".equals(action)) {//rename tree node name
-			String nodeName = request.getParameter("node");
-			return tempConfig.renameNode(nodeName);
-		} else if("move".equals(action)) {//move tree node name
-			String nodeName = request.getParameter("node");
-			return tempConfig.moveNode(nodeName);
-		}
-		return null;
-	}
+//	public String doModuleWork(HttpServletRequest request, HttpServletResponse response) {
+//		String action = request.getParameter("action");
+//		if(action == null) {
+//			return WebUtil.error("unknown action!");
+//		}
+//		if("list".equals(action)) {
+//			return listTemplatesJSON();
+//		} 
+//		String name = request.getParameter("name");
+//		if(name == null) {
+//			return WebUtil.error("unknown file name!");
+//		}
+//		TConfig tempConfig = getTemplateConfig(name);
+//		if(tempConfig == null) {
+//			return WebUtil.error("can not find template:" + name + "!");
+//		}
+//		if("content".equals(action)) {
+//			response.setContentType("application/xml");
+//			return tempConfig.getXMLContent();
+//		} else if("delete".equals(action)) {//delete tree node
+//			String nodeName = request.getParameter("node");
+//			return tempConfig.deleteNode(nodeName);
+//		} else if("add".equals(action)) {//add tree node
+//			String nodeName = request.getParameter("node");
+//			return tempConfig.addNode(nodeName);
+//		} else if("rename".equals(action)) {//rename tree node name
+//			String nodeName = request.getParameter("node");
+//			return tempConfig.renameNode(nodeName);
+//		} else if("move".equals(action)) {//move tree node name
+//			String nodeName = request.getParameter("node");
+//			return tempConfig.moveNode(nodeName);
+//		}
+//		return null;
+//	}
 	
 }
