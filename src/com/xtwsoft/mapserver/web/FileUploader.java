@@ -64,11 +64,11 @@ public class FileUploader {
 		HttpServletRequest request = params.getRequest();
 		HttpServletResponse response = params.getResponse();
 
-		// 获得磁盘文件条目工厂
+		
 
 		try {
 			request.setCharacterEncoding("utf-8"); // 设置编码
-
+			// 获得磁盘文件条目工厂
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			// 获取文件需要上传到的路径
 			File path = project.getFilePath();
