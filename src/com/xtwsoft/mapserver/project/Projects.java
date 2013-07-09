@@ -1,8 +1,12 @@
 package com.xtwsoft.mapserver.project;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
+
+import com.xtwsoft.mapserver.web.ServerConfig;
 
 public class Projects {
     private Map<String,Project> projects = new Hashtable<String,Project>(); 
@@ -20,5 +24,14 @@ public class Projects {
     
     public Project getProejct(String name) {
     	return projects.get(name);
+    }
+    
+    public void doInit() {
+    	File projectsPath = ServerConfig.getInstance().getProjectsPath();
+    	Iterator iters = projects.values().iterator();
+    	while(iters.hasNext()) {
+    		Project project = (Project)iters.next();
+    		project.doInit(projectsPath);
+    	}
     }
 }

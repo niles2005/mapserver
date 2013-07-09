@@ -3,6 +3,9 @@ package com.xtwsoft.mapserver.project;
 import java.io.File;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Project {
 
 	private Long id;
@@ -69,11 +72,45 @@ public class Project {
 		this.info = info;
 	}
 	
-	public File getFilePath() {
-		return null;
+	private File m_projectPath = null;
+	private File m_sourcePath = null;
+	public void doInit(File projectsPath) {
+		if(m_projectPath == null || !m_projectPath.exists()) {
+			m_projectPath = new File(projectsPath,this.name);
+			m_projectPath.mkdir();
+			
+		}
+		if(m_projectPath != null && m_projectPath.exists()) {
+			m_sourcePath = new File(m_projectPath,"source");
+			m_sourcePath.mkdir();
+		}
+	}
+	
+	public File getProjectPath() {
+		return m_projectPath;
+	}
+	
+	public File getSourcePath() {
+		return m_sourcePath;
 	}
 	
 	public String listFiles() {
+		File[] files = m_sourcePath.listFiles();
+		JSONArray json = new JSONArray();
+		try {
+			for (File f : files) {
+				if (!f.getName().endsWith(".tmp")) {
+					JSONObject jsono = new JSONObject();
+					jsono.put("name", f.getName());
+					jsono.put("size", f.length());
+					jsono.put("time", f.lastModified());
+					json.put(jsono);
+				}
+			}
+			return json.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
