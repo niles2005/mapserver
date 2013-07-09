@@ -82,7 +82,9 @@ public class Project {
 		}
 		if(m_projectPath != null && m_projectPath.exists()) {
 			m_sourcePath = new File(m_projectPath,"source");
-			m_sourcePath.mkdir();
+			if(!m_sourcePath.exists()) {
+				m_sourcePath.mkdir();
+			}
 		}
 	}
 	

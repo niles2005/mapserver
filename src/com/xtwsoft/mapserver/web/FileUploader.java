@@ -117,27 +117,27 @@ public class FileUploader {
 					// 真正写到磁盘上
 					// 它抛出的异常 用exception 捕捉
 
-//					item.write(new File(path, filename));// 第三方提供的
+					item.write(new File(path, filename));// 第三方提供的
 
-					// 手动写的
-					 OutputStream out = new FileOutputStream(new File(path,filename));
-					 InputStream in = item.getInputStream() ;
-					
-					 int length = 0 ;
-					 byte [] buf = new byte[1024] ;
-					
-					 System.out.println("获取上传文件的总共的容量："+item.getSize());
-					
-					 // in.read(buf) 每次读到的数据存放在 buf 数组中
-					 while( (length = in.read(buf) ) != -1)
-					 {
-					 //在 buf 数组中 取出数据 写到 （输出流）磁盘上
-						 out.write(buf, 0, length);
-//					 Thread.sleep(60000);//用于测试多文件上传，降低上传速度
-					 }
-					
-					 in.close();
-					 out.close();
+//					// 手动写的
+//					 OutputStream out = new FileOutputStream(new File(path,filename));
+//					 InputStream in = item.getInputStream() ;
+//					
+//					 int length = 0 ;
+//					 byte [] buf = new byte[1024] ;
+//					
+//					 System.out.println("获取上传文件的总共的容量："+item.getSize());
+//					
+//					 // in.read(buf) 每次读到的数据存放在 buf 数组中
+//					 while( (length = in.read(buf) ) != -1)
+//					 {
+//					 //在 buf 数组中 取出数据 写到 （输出流）磁盘上
+//						 out.write(buf, 0, length);
+//						
+//					 }
+//					
+//					 in.close();
+//					 out.close();
 				}
 			}
 
