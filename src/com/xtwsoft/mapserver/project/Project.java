@@ -73,19 +73,29 @@ public class Project {
 	}
 	
 	private File m_projectPath = null;
+	private File m_sourcePath = null;
 	public void doInit(File projectsPath) {
 		if(m_projectPath == null || !m_projectPath.exists()) {
 			m_projectPath = new File(projectsPath,this.name);
 			m_projectPath.mkdir();
+			
+		}
+		if(m_projectPath != null && m_projectPath.exists()) {
+			m_sourcePath = new File(m_projectPath,"source");
+			m_sourcePath.mkdir();
 		}
 	}
 	
-	public File getFilePath() {
+	public File getProjectPath() {
 		return m_projectPath;
 	}
 	
+	public File getSourcePath() {
+		return m_sourcePath;
+	}
+	
 	public String listFiles() {
-		File[] files = m_projectPath.listFiles();
+		File[] files = m_sourcePath.listFiles();
 		JSONArray json = new JSONArray();
 		try {
 			for (File f : files) {
