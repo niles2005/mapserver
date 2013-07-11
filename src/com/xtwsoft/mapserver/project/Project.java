@@ -6,6 +6,8 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSON;
+
 public class Project {
 
 	private Long id;
@@ -15,7 +17,16 @@ public class Project {
 	private Date createTime;
 	private String creator;
 	private String info;
-
+	private Module module = new Module();
+	
+	public Module fetchModule() {
+		return module;
+	}
+	
+	public Module setModule(Module module) {
+		return this.module = module;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -88,11 +99,11 @@ public class Project {
 		}
 	}
 	
-	public File getProjectPath() {
+	public File fetchProjectPath() {
 		return m_projectPath;
 	}
 	
-	public File getSourcePath() {
+	public File fetchSourcePath() {
 		return m_sourcePath;
 	}
 	
@@ -114,6 +125,13 @@ public class Project {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String fetchModuleInfo() {
+		if(module == null) {
+			return "{}";
+		}
+		return JSON.toJSONString(module);
 	}
 	
 }

@@ -28,9 +28,9 @@ public class FileServlet extends BaseServlet {
 		} else if("upload".equals(action)) {
 			return new FileUploader().doFileUpLoad(params, project);
 		} else if("md5sum".equals(action)){
-			System.out.println(project.getSourcePath().toString()+"/"+params.getValue("name"));
-			System.out.println(MD5sum.getHash(project.getSourcePath().toString()+"/"+params.getValue("name"), "MD5"));
-			return MD5sum.getHash(project.getSourcePath().toString()+"/"+params.getValue("name"), "MD5");
+			System.out.println(project.fetchSourcePath().toString()+"/"+params.getValue("name"));
+			System.out.println(MD5sum.getHash(project.fetchSourcePath().toString()+"/"+params.getValue("name"), "MD5"));
+			return MD5sum.getHash(project.fetchSourcePath().toString()+"/"+params.getValue("name"), "MD5");
 			
 		}
 		return null;

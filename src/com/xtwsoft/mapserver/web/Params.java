@@ -38,6 +38,7 @@ public class Params {
 					strBuff.append(str);
 					str = reader.readLine();
 				}
+				
 				JsonParser parser = new JsonParser();
 				m_json = (JsonObject) parser.parse(strBuff.toString());
 			} catch(Exception ex) {
@@ -63,6 +64,13 @@ public class Params {
 	public JsonElement getJsonElement(String name) {
 		if(m_json != null) {
 			return m_json.get(name);
+		}
+		return null;
+	}
+	
+	public JsonObject getJsonObject(String name) {
+		if(m_json != null) {
+			return m_json.getAsJsonObject(name);
 		}
 		return null;
 	}

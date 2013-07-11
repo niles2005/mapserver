@@ -1,14 +1,13 @@
 package com.xtwsoft.mapserver.project;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.FileReader;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.xtwsoft.mapserver.web.ServerConfig;
 import com.xtwsoft.mapserver.web.WebUtil;
 
@@ -18,7 +17,14 @@ public class ProjectManager {
 	private Projects m_projects = null;
 	private ProjectManager(File file) {
 		try {
-			m_projects = m_mapper.readValue(file, Projects.class);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = reader.readLine();
+			reader.close();
+			
+			if(line.length() > 0) {
+				Gson gson = new Gson();
+				m_projects = gson.fromJson(line, Projects.class);
+			}
 			if(m_projects == null) {
 				m_projects = new Projects();
 			}

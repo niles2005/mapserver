@@ -7,6 +7,8 @@ import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.google.gson.Gson;
+
 public class TestJackson {
 	public TestJackson() {
 		test2();
@@ -69,6 +71,21 @@ public class TestJackson {
             e.printStackTrace();
         }
 	}
+	
+	public void test3() {
+		
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+
+			String str = "{\"projects\":{\"shanghai\":{\"id\":1,\"name\":\"shanghai\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"Jul 11, 2013 10:04:14 AM\",\"creator\":\"niles\",\"info\":\"Test map project for shanghai\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},\"njcc\":{\"name\":\"njcc\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"Jul 11, 2013 10:04:14 AM\",\"creator\":\"niles\",\"info\":\"map project for njcc\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},\"test\":{\"name\":\"test\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"Jul 11, 2013 10:04:14 AM\",\"creator\":\"niles\",\"info\":\"Test map project\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1]}}},\"updateTime\":\"Jul 11, 2013 10:04:14 AM\"}";
+			JsonGenerator jsonGenerator = mapper.getJsonFactory().createJsonGenerator(System.out, JsonEncoding.UTF8);
+//			jsonGenerator.writeObject(projects);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+	}
+
 	
 	public static void main(String[] args) {
 		new TestJackson();

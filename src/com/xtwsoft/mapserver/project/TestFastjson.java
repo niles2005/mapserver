@@ -6,12 +6,14 @@ import java.io.FileReader;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public class TestFastjson {
 	public TestFastjson() {
 //		test1();
-		test2();
-		test3();
+//		test2();
+//		test3();
+		test4();
 	}
 
 	
@@ -34,7 +36,7 @@ public class TestFastjson {
 	private void test2() {
 		Projects projects = new Projects();
 		projects.setUpdateTime(new Date());
-		//ÉèÖÃÊ±¼ä²ÎÊý£¬»áÔì³ÉÒì³££ºException in thread "main" java.lang.ClassCastException: com.alibaba.fastjson.JSONObject cannot be cast to com.xtwsoft.mapserver.project.Project
+		//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½Exception in thread "main" java.lang.ClassCastException: com.alibaba.fastjson.JSONObject cannot be cast to com.xtwsoft.mapserver.project.Project
 		
 		Project proj1 = new Project();
 		
@@ -97,6 +99,20 @@ public class TestFastjson {
 		System.err.println(projs.getProejct("shanghai1"));
 
 	}
+	
+	public void test4() {
+		try {
+			String str = "{\"projects\":{\"shanghai\":{\"id\":1,\"name\":\"shanghai\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"2353553464\",\"creator\":\"niles\",\"info\":\"Test map project for shanghai\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},\"njcc\":{\"name\":\"njcc\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"47457547547\",\"creator\":\"niles\",\"info\":\"map project for njcc\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},\"test\":{\"name\":\"test\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"3464764745\",\"creator\":\"niles\",\"info\":\"Test map project\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,3,3,4]}}},\"updateTime\":\"5435436464\"}";
+			JSONObject jsonObject = JSON.parseObject(str);
+			
+			Projects projects = JSON.parseObject(str,Projects.class);
+			System.err.println(JSON.toJSONString(projects));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+	}
+
 	
 	public static void main(String[] args) {
 		new TestFastjson();

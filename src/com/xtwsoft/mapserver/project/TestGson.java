@@ -5,17 +5,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Date;
 
-import org.codehaus.jackson.JsonEncoding;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.map.ObjectMapper;
-
-import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class TestGson {
 	public TestGson() {
 //		test1();
-		test2();
+//		test2();
+		test3();
 	}
 
 	
@@ -83,6 +82,26 @@ public class TestGson {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+	}
+	
+	public void test3() {
+		String str = "{\"projects\":{\"shanghai\":{\"id\":1,\"name\":\"shanghai\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"Jul 11, 2013 10:04:14 AM\",\"creator\":\"niles\",\"info\":\"Test map project for shanghai\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},\"njcc\":{\"name\":\"njcc\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"Jul 11, 2013 10:04:14 AM\",\"creator\":\"niles\",\"info\":\"map project for njcc\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},\"test\":{\"name\":\"test\",\"vendor\":\"OSM\",\"imageUrl\":\"img/osm.png\",\"createTime\":\"Jul 11, 2013 10:04:14 AM\",\"creator\":\"niles\",\"info\":\"Test map project\",\"module\":{\"d0\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d1\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"d2\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,3,3,3]}}},\"updateTime\":\"Jul 11, 2013 10:04:14 AM\"}";
+		System.err.println(str);
+		JsonParser jsonParser = new JsonParser();
+		JsonObject jo = (JsonObject)jsonParser.parse(str);
+		
+		JsonObject jo1 = jo.getAsJsonObject("projects");
+		JsonObject jo2 = jo1.getAsJsonObject("shanghai");
+		JsonElement je = jo2.get("id");
+		
+		System.err.println(je.getAsString());
+		Gson gson = new Gson();
+		Projects theProjects = gson.fromJson(jo, Projects.class);
+		System.err.println(gson.toJson(theProjects));
+//		gson.fromJson(str, typeOfT);
+//		Projects theProjects = gson.fromJson(str, Projects.class);
+//		System.err.println(gson.toJson(theProjects));
+		
 	}
 	
 	public static void main(String[] args) {
