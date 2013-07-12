@@ -10,9 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.xtwsoft.mapserver.global.Global;
 import com.xtwsoft.mapserver.project.Project;
-import com.xtwsoft.mapserver.project.ProjectManager;
-import com.xtwsoft.mapserver.template.TemplateManager;
 
 public class RestFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -23,9 +22,12 @@ public class RestFilter implements Filter {
 			if(ServerConfig.getInstance() == null) {
 				System.err.println("init server error!");
 			}
-			TemplateManager.initInstance();
 			
-			ProjectManager.initInstance();
+			Global.getInstance();
+			
+//			TemplateManager.initInstance();
+//			
+//			ProjectManager.initInstance();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -49,7 +51,7 @@ public class RestFilter implements Filter {
 					if(realUrl.indexOf(".") != -1) {//angular.js  main.css
 						chain.doFilter(req, res);
 					} else {//
-						Project project = ProjectManager.getInstance().getProejct(realUrl.substring(1));
+						Project project = Global.getInstance().getProject(realUrl.substring(1));
 						if(project != null) {
 							request.getRequestDispatcher(
 					                "/index2.html").forward(request,res);

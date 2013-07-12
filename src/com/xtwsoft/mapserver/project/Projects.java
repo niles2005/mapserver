@@ -6,7 +6,11 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import com.alibaba.fastjson.JSON;
 import com.xtwsoft.mapserver.web.ServerConfig;
+import com.xtwsoft.mapserver.web.WebUtil;
 
 public class Projects {
     private Map<String,Project> projects = new Hashtable<String,Project>(); 
@@ -34,4 +38,9 @@ public class Projects {
     		project.doInit(projectsPath);
     	}
     }
+    
+	public String listProjectJSON() {
+		return JSON.toJSONString(projects);
+	}
+    
 }

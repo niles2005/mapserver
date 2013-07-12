@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import com.alibaba.fastjson.JSON;
 
 public class Project {
-
+	
 	private Long id;
 	private String name;
 	private String vendor;
@@ -133,5 +133,6 @@ public class Project {
 		}
 		return JSON.toJSONString(module);
 	}
+	
 	
 }

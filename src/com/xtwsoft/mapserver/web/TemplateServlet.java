@@ -2,8 +2,9 @@ package com.xtwsoft.mapserver.web;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.xtwsoft.mapserver.template.TConfig;
-import com.xtwsoft.mapserver.template.TemplateManager;
+import com.xtwsoft.mapserver.global.Global;
+import com.xtwsoft.mapserver.template.Template;
+import com.xtwsoft.mapserver.template.Templates;
 
 @WebServlet("/template")
 public class TemplateServlet extends BaseServlet {
@@ -15,31 +16,32 @@ public class TemplateServlet extends BaseServlet {
 			return WebUtil.error("unknown action!");
 		}
 		if("list".equals(action)) {
-			return TemplateManager.getInstance().listTemplatesJSON();
+			Templates templates = Global.getInstance().getTemplates();
+			return templates.listTemplatesJSON();
 		} 
 		String name = params.getValue("name");
 		if(name == null) {
 			return WebUtil.error("unknown file name!");
 		}
-		TConfig tempConfig = TemplateManager.getInstance().getTemplateConfig(name);
-		if(tempConfig == null) {
+		Template template = Global.getInstance().getTemplate(name);
+		if(template == null) {
 			return WebUtil.error("can not find template:" + name + "!");
 		}
 		if("content".equals(action)) {
 			params.setContentType("application/xml");
-			return tempConfig.getXMLContent();
+			return template.getXMLContent();
 		} else if("delete".equals(action)) {//delete tree node
 			String nodeName = params.getValue("node");
-			return tempConfig.deleteNode(nodeName);
+			return template.deleteNode(nodeName);
 		} else if("add".equals(action)) {//add tree node
 			String nodeName = params.getValue("node");
-			return tempConfig.addNode(nodeName);
+			return template.addNode(nodeName);
 		} else if("rename".equals(action)) {//rename tree node name
 			String nodeName = params.getValue("node");
-			return tempConfig.renameNode(nodeName);
+			return template.renameNode(nodeName);
 		} else if("move".equals(action)) {//move tree node name
 			String nodeName = params.getValue("node");
-			return tempConfig.moveNode(nodeName);
+			return template.moveNode(nodeName);
 		}
 		return null;
 	}

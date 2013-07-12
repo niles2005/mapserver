@@ -48,4 +48,18 @@ public class ServerConfig {
 	public File getProjectsPath() {
 		return m_projectsPath;
 	}
+	
+	public File getProjectsFile() {
+		if(m_configPath != null) {
+			return new File(m_configPath,"projects.json");
+		}
+		return null;
+	}
+	
+	public File getTemplatesPath() {
+		if(m_configPath != null) {
+			return new File(m_configPath,"templates");
+		}
+		return null;
+	}
 }

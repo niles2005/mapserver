@@ -4,9 +4,10 @@ import javax.servlet.annotation.WebServlet;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.xtwsoft.mapserver.global.Global;
 import com.xtwsoft.mapserver.project.Module;
 import com.xtwsoft.mapserver.project.Project;
-import com.xtwsoft.mapserver.project.ProjectManager;
+import com.xtwsoft.mapserver.project.Projects;
 
 @WebServlet("/project")
 public class ProjectServlet extends BaseServlet {
@@ -16,14 +17,15 @@ public class ProjectServlet extends BaseServlet {
 			return WebUtil.error("unknown action!");
 		}
 		if("list".equals(action)) {
-			return ProjectManager.getInstance().listProjectJSON();
+			Projects projects = Global.getInstance().getProjects();
+			return projects.listProjectJSON();
 		} 
 
 		String projectName = params.getValue("project");
 		if(projectName == null) {
 			return WebUtil.error("unknown project!");
 		}
-		Project project = ProjectManager.getInstance().getProejct(projectName);
+		Project project = Global.getInstance().getProject(projectName);
 		if(project == null) {
 			return WebUtil.error("can not find project:" + projectName);
 		} 

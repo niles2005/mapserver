@@ -2,8 +2,8 @@ package com.xtwsoft.mapserver.web;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.xtwsoft.mapserver.global.Global;
 import com.xtwsoft.mapserver.project.Project;
-import com.xtwsoft.mapserver.project.ProjectManager;
 
 @WebServlet("/file")
 public class FileServlet extends BaseServlet {
@@ -14,7 +14,7 @@ public class FileServlet extends BaseServlet {
 		if(projectName == null) {
 			return WebUtil.error("unknown project!");
 		}
-		Project project = ProjectManager.getInstance().getProejct(projectName);
+		Project project = Global.getInstance().getProject(projectName);
 		if(project == null) {
 			return WebUtil.error("can not find project:" + projectName);
 		} 
