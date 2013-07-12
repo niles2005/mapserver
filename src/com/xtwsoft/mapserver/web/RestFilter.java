@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import com.xtwsoft.mapserver.global.Global;
+import com.xtwsoft.mapserver.file.FileDataManager;
 import com.xtwsoft.mapserver.project.Project;
 
 public class RestFilter implements Filter {
@@ -25,9 +26,7 @@ public class RestFilter implements Filter {
 			
 			Global.getInstance();
 			
-//			TemplateManager.initInstance();
-//			
-//			ProjectManager.initInstance();
+			FileDataManager.initInstance();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

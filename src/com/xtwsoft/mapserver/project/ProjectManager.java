@@ -24,6 +24,7 @@ public class ProjectManager {
 			if(line.length() > 0) {
 				Gson gson = new Gson();
 				m_projects = gson.fromJson(line, Projects.class);
+				
 			}
 			if(m_projects == null) {
 				m_projects = new Projects();

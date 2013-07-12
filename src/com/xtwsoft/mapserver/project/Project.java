@@ -3,10 +3,16 @@ package com.xtwsoft.mapserver.project;
 import java.io.File;
 import java.util.Date;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
+import com.xtwsoft.mapserver.file.FileDataManager;
+import com.xtwsoft.mapserver.file.FileDataOfProject;
+
 import com.alibaba.fastjson.JSON;
+
 
 public class Project {
 	
@@ -14,7 +20,7 @@ public class Project {
 	private String name;
 	private String vendor;
 	private String imageUrl;
-	private Date createTime;
+	private Long createTime;
 	private String creator;
 	private String info;
 	private Module module = new Module();
@@ -59,11 +65,11 @@ public class Project {
 		return this.imageUrl;
 	}
 	
-	public void setCreateTime(Date date) {
+	public void setCreateTime(Long date) {
 		this.createTime = date;
 	}
 	
-	public Date getCreateTime() {
+	public Long getCreateTime() {
 		return this.createTime;
 	}
 
@@ -108,19 +114,23 @@ public class Project {
 	}
 	
 	public String listFiles() {
-		File[] files = m_sourcePath.listFiles();
-		JSONArray json = new JSONArray();
+//		File[] files = m_sourcePath.listFiles();
+//		JSONArray json = new JSONArray();
 		try {
-			for (File f : files) {
-				if (!f.getName().endsWith(".tmp")) {
-					JSONObject jsono = new JSONObject();
-					jsono.put("name", f.getName());
-					jsono.put("size", f.length());
-					jsono.put("time", f.lastModified());
-					json.put(jsono);
-				}
-			}
-			return json.toString();
+//			for (File f : files) {
+//				if (!f.getName().endsWith(".tmp")) {
+//					JSONObject jsono = new JSONObject();
+//					jsono.put("name", f.getName());
+//					jsono.put("size", f.length());
+//					jsono.put("time", f.lastModified());
+//					json.put(jsono);
+//				}
+//			}
+//			return json.toString();
+			ObjectMapper mapper= new ObjectMapper();
+			return mapper.writeValueAsString(FileDataManager.getInstance().getFileDataManagerForProject(name).fetchFileDatas());
+		
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

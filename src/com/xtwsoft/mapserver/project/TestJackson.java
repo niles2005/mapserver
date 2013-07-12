@@ -28,7 +28,7 @@ public class TestJackson {
 	
 	private void test2() {
 		Projects projects = new Projects();
-		projects.setUpdateTime(new Date());
+		projects.setUpdateTime(new Date().getTime());
 		
 		Project proj1 = new Project();
 		
@@ -36,7 +36,7 @@ public class TestJackson {
 		proj1.setName("shanghai");
 		proj1.setVendor("OSM");
 		proj1.setImageUrl("img/osm.png");
-		proj1.setCreateTime(new Date());
+		proj1.setCreateTime(new Date().getTime());
 		proj1.setCreator("niles");
 		proj1.setInfo("Test map project for shanghai");
 		projects.addProject(proj1);
@@ -46,7 +46,7 @@ public class TestJackson {
 		proj2.setName("test");
 		proj2.setVendor("OSM");
 		proj2.setImageUrl("img/osm.png");
-		proj2.setCreateTime(new Date());
+		proj2.setCreateTime(new Date().getTime());
 		proj2.setCreator("niles");
 		proj2.setInfo("Test map project");
 		projects.addProject(proj2);
@@ -56,7 +56,7 @@ public class TestJackson {
 		proj3.setName("njcc");
 		proj3.setVendor("OSM");
 		proj3.setImageUrl("img/osm.png");
-		proj3.setCreateTime(new Date());
+		proj3.setCreateTime(new Date().getTime());
 		proj3.setCreator("niles");
 		proj3.setInfo("map project for njcc");
 		projects.addProject(proj3);
