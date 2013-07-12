@@ -52,8 +52,9 @@ public class RestFilter implements Filter {
 					} else {//
 						Project project = Global.getInstance().getProject(realUrl.substring(1));
 						if(project != null) {
+							request.setAttribute("project", project);
 							request.getRequestDispatcher(
-					                "/index2.html").forward(request,res);
+					                "/index2.jsp").forward(request,res);
 						} else {
 							chain.doFilter(req, res);
 						}

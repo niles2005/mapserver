@@ -21,18 +21,18 @@ public class Template {
 		this.m_name = name;
 	}
 
-	public TConfig getTemplateConfig(String name) {
+	public TConfig fetchTemplateConfig(String name) {
 		return m_tempConfig;
 	}
 	
-	public String getTemplateContent() {
+	public String fetchTemplateContent() {
 		if(m_tempConfig != null) {
 			return m_tempConfig.getXMLContent();
 		}
 		return "{\"error\":\"Can not find file:" + m_name + "\"}";
 	}
 	
-	public String getXMLContent() {
+	public String fetchXMLContent() {
 		return m_tempConfig.getXMLContent();
 	}
 	

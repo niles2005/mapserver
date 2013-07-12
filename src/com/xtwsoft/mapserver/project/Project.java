@@ -1,17 +1,11 @@
 package com.xtwsoft.mapserver.project;
 
 import java.io.File;
-import java.util.Date;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-
-import com.xtwsoft.mapserver.file.FileDataManager;
-import com.xtwsoft.mapserver.file.FileDataOfProject;
 
 import com.alibaba.fastjson.JSON;
+import com.xtwsoft.mapserver.file.FileDataManager;
 
 
 public class Project {

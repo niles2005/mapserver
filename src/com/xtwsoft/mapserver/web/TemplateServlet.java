@@ -29,7 +29,7 @@ public class TemplateServlet extends BaseServlet {
 		}
 		if("content".equals(action)) {
 			params.setContentType("application/xml");
-			return template.getXMLContent();
+			return template.fetchXMLContent();
 		} else if("delete".equals(action)) {//delete tree node
 			String nodeName = params.getValue("node");
 			return template.deleteNode(nodeName);
