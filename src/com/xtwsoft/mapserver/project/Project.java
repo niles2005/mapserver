@@ -3,8 +3,12 @@ package com.xtwsoft.mapserver.project;
 import java.io.File;
 import java.util.Date;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.xtwsoft.mapserver.file.FileDataManager;
+import com.xtwsoft.mapserver.file.FileDataOfProject;
 
 public class Project {
 
@@ -97,19 +101,25 @@ public class Project {
 	}
 	
 	public String listFiles() {
-		File[] files = m_sourcePath.listFiles();
-		JSONArray json = new JSONArray();
+//		File[] files = m_sourcePath.listFiles();
+//		JSONArray json = new JSONArray();
 		try {
-			for (File f : files) {
-				if (!f.getName().endsWith(".tmp")) {
-					JSONObject jsono = new JSONObject();
-					jsono.put("name", f.getName());
-					jsono.put("size", f.length());
-					jsono.put("time", f.lastModified());
-					json.put(jsono);
-				}
-			}
-			return json.toString();
+//			for (File f : files) {
+//				if (!f.getName().endsWith(".tmp")) {
+//					JSONObject jsono = new JSONObject();
+//					jsono.put("name", f.getName());
+//					jsono.put("size", f.length());
+//					jsono.put("time", f.lastModified());
+//					json.put(jsono);
+//				}
+//			}
+//			return json.toString();
+			ObjectMapper mapper= new ObjectMapper();
+			
+			System.out.println(mapper.writeValueAsString(FileDataManager.getInstance().getFileDataManagerForProject(name).fetchFileDatas()));
+			return mapper.writeValueAsString(FileDataManager.getInstance().getFileDataManagerForProject(name).fetchFileDatas());
+		
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

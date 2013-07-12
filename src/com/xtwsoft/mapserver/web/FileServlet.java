@@ -1,7 +1,11 @@
 package com.xtwsoft.mapserver.web;
 
+import java.io.File;
+
 import javax.servlet.annotation.WebServlet;
 
+import com.xtwsoft.mapserver.file.FileDataManager;
+import com.xtwsoft.mapserver.file.FileDataOfProject;
 import com.xtwsoft.mapserver.project.Project;
 import com.xtwsoft.mapserver.project.ProjectManager;
 
@@ -28,9 +32,11 @@ public class FileServlet extends BaseServlet {
 		} else if("upload".equals(action)) {
 			return new FileUploader().doFileUpLoad(params, project);
 		} else if("md5sum".equals(action)){
-			System.out.println(project.getSourcePath().toString()+"/"+params.getValue("name"));
-			System.out.println(MD5sum.getHash(project.getSourcePath().toString()+"/"+params.getValue("name"), "MD5"));
-			return MD5sum.getHash(project.getSourcePath().toString()+"/"+params.getValue("name"), "MD5");
+			String fileName = params.getValue("name");
+			String md5sum = MD5sum.getHash(project.getSourcePath().toString()+"/"+fileName, "MD5");
+			(FileDataManager.getInstance().getFileDataManagerForProject(projectName).getFileData(fileName)).setMd5Sum(md5sum);
+			FileDataManager.getInstance().getFileDataManagerForProject(projectName).writeFileDatasJson(new File(project.getProjectPath()+"/props","props.json"));
+			return md5sum;
 			
 		}
 		return null;

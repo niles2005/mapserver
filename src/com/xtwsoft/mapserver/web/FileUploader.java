@@ -1,13 +1,8 @@
 package com.xtwsoft.mapserver.web;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +11,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.xtwsoft.mapserver.file.FileData;
+import com.xtwsoft.mapserver.file.FileDataManager;
+import com.xtwsoft.mapserver.file.FileDataOfProject;
 import com.xtwsoft.mapserver.project.Project;
 
 /**
@@ -135,9 +133,14 @@ public class FileUploader {
 //						 out.write(buf, 0, length);
 //						
 //					 }
-//					
 //					 in.close();
 //					 out.close();
+					
+					FileData fd = new FileData(filename,item.getSize());
+					fd.setCreateTime(System.currentTimeMillis());
+					FileDataOfProject fileDataOfProject = FileDataManager.getInstance().getFileDataManagerForProject(project.getName());
+					fileDataOfProject.addFileData(fd);
+					fileDataOfProject.writeFileDatasJson(new File(project.getProjectPath()+"/props","props.json"));
 				}
 			}
 
@@ -148,6 +151,8 @@ public class FileUploader {
 			e.printStackTrace();
 			return WebUtil.error("Exception:" + e.getMessage());
 		}
+		
+		
 		return WebUtil.oKJSON();
 	}
 

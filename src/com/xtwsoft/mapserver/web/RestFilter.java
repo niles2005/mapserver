@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.xtwsoft.mapserver.file.FileDataManager;
 import com.xtwsoft.mapserver.project.Project;
 import com.xtwsoft.mapserver.project.ProjectManager;
 import com.xtwsoft.mapserver.template.TemplateManager;
@@ -24,8 +25,8 @@ public class RestFilter implements Filter {
 				System.err.println("init server error!");
 			}
 			TemplateManager.initInstance();
-			
 			ProjectManager.initInstance();
+			FileDataManager.initInstance();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
