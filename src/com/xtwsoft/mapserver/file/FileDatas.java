@@ -18,7 +18,7 @@ public class FileDatas {
 		fileMap.put(fileData.getName(), fileData);
 	}
 	
-	public FileData fetchFileData(String fileDataName){
+	public Object fetchFileData(String fileDataName){
 		return fileMap.get(fileDataName);
 	}
 

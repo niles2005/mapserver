@@ -2,8 +2,10 @@ package com.xtwsoft.mapserver.file;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 
 import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
@@ -17,12 +19,13 @@ public class FileDataOfProject {
 	private static ObjectMapper fileData_mapper= new ObjectMapper();
 	public FileDataOfProject(File file){
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 			String line = reader.readLine();
 			reader.close();
 			
 			if(line.length() > 0) {
 				m_fileDatas = JSON.parseObject(line, FileDatas.class);
+				
 			}
 			if(m_fileDatas == null){
 				m_fileDatas = new FileDatas();
@@ -43,7 +46,7 @@ public class FileDataOfProject {
 		return m_fileDatas;
 	}
 	
-	public FileData getFileData(String fileDataName){
+	public Object getFileData(String fileDataName){
 		return m_fileDatas.fetchFileData(fileDataName);
 	}
 	

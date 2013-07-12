@@ -7,8 +7,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import com.xtwsoft.mapserver.file.FileDataManager;
 import com.xtwsoft.mapserver.file.FileDataOfProject;
+
+import com.alibaba.fastjson.JSON;
+
 
 public class Project {
 
@@ -16,10 +20,19 @@ public class Project {
 	private String name;
 	private String vendor;
 	private String imageUrl;
-	private Date createTime;
+	private Long createTime;
 	private String creator;
 	private String info;
-
+	private Module module = new Module();
+	
+	public Module fetchModule() {
+		return module;
+	}
+	
+	public Module setModule(Module module) {
+		return this.module = module;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -52,11 +65,11 @@ public class Project {
 		return this.imageUrl;
 	}
 	
-	public void setCreateTime(Date date) {
+	public void setCreateTime(Long date) {
 		this.createTime = date;
 	}
 	
-	public Date getCreateTime() {
+	public Long getCreateTime() {
 		return this.createTime;
 	}
 
@@ -92,11 +105,11 @@ public class Project {
 		}
 	}
 	
-	public File getProjectPath() {
+	public File fetchProjectPath() {
 		return m_projectPath;
 	}
 	
-	public File getSourcePath() {
+	public File fetchSourcePath() {
 		return m_sourcePath;
 	}
 	
@@ -115,8 +128,6 @@ public class Project {
 //			}
 //			return json.toString();
 			ObjectMapper mapper= new ObjectMapper();
-			
-			System.out.println(mapper.writeValueAsString(FileDataManager.getInstance().getFileDataManagerForProject(name).fetchFileDatas()));
 			return mapper.writeValueAsString(FileDataManager.getInstance().getFileDataManagerForProject(name).fetchFileDatas());
 		
 		
@@ -124,6 +135,13 @@ public class Project {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String fetchModuleInfo() {
+		if(module == null) {
+			return "{}";
+		}
+		return JSON.toJSONString(module);
 	}
 	
 }

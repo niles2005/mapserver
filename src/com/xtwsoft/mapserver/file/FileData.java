@@ -7,6 +7,9 @@ public class FileData {
 	private long createTime;
 	private String md5Sum;
 	
+	public FileData(){
+		
+	}
 	public FileData(String name, long size) {
 		this.name = name;
 		this.size = size;
