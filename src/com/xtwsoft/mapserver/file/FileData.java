@@ -13,8 +13,9 @@ public class FileData {
 	public FileData(String name, long size) {
 		this.name = name;
 		this.size = size;
-		
+		setCreateTime(System.currentTimeMillis());
 	}
+	
 	public String getName() {
 		return name;
 	}

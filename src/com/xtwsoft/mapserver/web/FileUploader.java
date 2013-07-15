@@ -12,7 +12,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.xtwsoft.mapserver.file.FileData;
-import com.xtwsoft.mapserver.project.Project;
+import com.xtwsoft.mapserver.file.FileDatas;
 
 /**
  * 
@@ -56,7 +56,7 @@ public class FileUploader {
 //		resp.getWriter().println(json.toString());
 //	}
 
-	public String doFileUpLoad(Params params,Project project) {
+	public String doFileUpLoad(Params params,FileDatas fileDatas) {
 		HttpServletRequest request = params.getRequest();
 		HttpServletResponse response = params.getResponse();
 
@@ -67,8 +67,8 @@ public class FileUploader {
 			// 获得磁盘文件条目工厂
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			// 获取文件需要上传到的路径
-			File path = project.fetchSourcePath();
-			System.out.println("project name is "+project.getName());
+			File path = fileDatas.fetchSourcePath();
+			System.out.println("project name is "+fileDatas.fetchProject().getName());
 			System.out.println("update path is "+path);
 
 			// 如果没以下两行设置的话，上传大的 文件 会占用 很多内存，
@@ -137,18 +137,17 @@ public class FileUploader {
 //					 out.close();
 					
 					FileData fd = new FileData(filename,item.getSize());
-					fd.setCreateTime(System.currentTimeMillis());
-					project.fetchFileDatas().addFileData(fd);
-					project.fetchFileDatas().writeFileDatasJson(project.fetchPropsJson());
+					fileDatas.addFileData(fd);
 				}
 			}
-
 		} catch (FileUploadException e) {
 			e.printStackTrace();
 			return WebUtil.error("FileUploadException:" + e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return WebUtil.error("Exception:" + e.getMessage());
+		} finally {
+			fileDatas.savePropFile();
 		}
 		
 		
