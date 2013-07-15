@@ -11,14 +11,14 @@ import com.google.gson.Gson;
 
 public class TestJackson {
 	public TestJackson() {
-		test2();
+		test1();
 	}
 
 	
 	private void test1() {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			File file = new File("D:\\mywork\\mapserver\\workspace\\mapserver\\WebContent\\WEB-INF\\config\\projects.json");
+			File file = new File("D:\\apache-tomcat-7.0.40\\webapps\\mapflow\\WEB-INF\\config\\projects.json");
 			Projects projects = mapper.readValue(file, Projects.class);
 			System.err.println("|" + projects.getProejct("shanghai").getVendor() + "|");
 		} catch(Exception ex) {
@@ -88,7 +88,7 @@ public class TestJackson {
 
 	
 	public static void main(String[] args) {
-		new TestJackson();
+//		new TestJackson();
 	}
 
 }

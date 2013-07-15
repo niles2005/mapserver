@@ -28,7 +28,7 @@ public class TestFileDatas {
 			FileDatas fileDatas = JSON.parseObject(str,FileDatas.class);
 			
 //			Map filesMap= mapper.readValue(str, Map.class);
-			
+			System.out.println(((FileData)fileDatas.fetchFileData("a")).getSize());
 			
 			str = mapper.writeValueAsString(fileDatas);
 			

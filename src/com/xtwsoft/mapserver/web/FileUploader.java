@@ -12,8 +12,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.xtwsoft.mapserver.file.FileData;
-import com.xtwsoft.mapserver.file.FileDataManager;
-import com.xtwsoft.mapserver.file.FileDataOfProject;
 import com.xtwsoft.mapserver.project.Project;
 
 /**
@@ -70,6 +68,8 @@ public class FileUploader {
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			// 获取文件需要上传到的路径
 			File path = project.fetchSourcePath();
+			System.out.println("project name is "+project.getName());
+			System.out.println("update path is "+path);
 
 			// 如果没以下两行设置的话，上传大的 文件 会占用 很多内存，
 			// 设置暂时存放的 存储室 , 这个存储室，可以和 最终存储文件 的目录不同
@@ -138,9 +138,8 @@ public class FileUploader {
 					
 					FileData fd = new FileData(filename,item.getSize());
 					fd.setCreateTime(System.currentTimeMillis());
-					FileDataOfProject fileDataOfProject = FileDataManager.getInstance().getFileDataManagerForProject(project.getName());
-					fileDataOfProject.addFileData(fd);
-					fileDataOfProject.writeFileDatasJson(new File(project.fetchProjectPath()+"/props","props.json"));
+					project.fetchFileDatas().addFileData(fd);
+					project.fetchFileDatas().writeFileDatasJson(project.fetchPropsJson());
 				}
 			}
 

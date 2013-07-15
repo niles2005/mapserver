@@ -42,10 +42,14 @@ public class Global {
 			File projectsFile = ServerConfig.getInstance().getProjectsFile();
 			String projectsLine = readJSONFileContent(projectsFile);
 			if(projectsLine != null) {
+				System.out.println("get projects from projects.json");
 				m_projects = gson.fromJson(projectsLine, Projects.class);
+				m_projects.doInit();
 			}
 			if(m_projects == null) {
+				System.out.println("get projects from projects path files");
 				m_projects = new Projects();
+				m_projects.doInit();
 			}
 
 			//init templates
