@@ -115,6 +115,6 @@ public class TestFastjson {
 
 	
 	public static void main(String[] args) {
-		new TestFastjson();
+//		new TestFastjson();
 	}
 }

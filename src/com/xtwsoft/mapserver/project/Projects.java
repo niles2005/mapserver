@@ -29,6 +29,10 @@ public class Projects {
     	return projects.get(name);
     }
     
+    public Projects(){
+    	
+    }
+    
     public void doInit() {
     	File projectsPath = ServerConfig.getInstance().getProjectsPath();
     	Iterator iters = projects.values().iterator();
@@ -36,6 +40,17 @@ public class Projects {
     		Project project = (Project)iters.next();
     		project.doInit(projectsPath);
     	}
+    	
+    	if(projects.isEmpty()){
+    		File [] projectFiles = projectsPath.listFiles();
+        	for(int i=0;i<projectFiles.length;i++){
+        		Project project = new Project();
+        		project.setName(projectFiles[i].getName());
+        		project.doInit(projectsPath);
+        		addProject(project);
+        	}
+    	}
+    	
     }
     
 	public String listProjectJSON() {

@@ -8,8 +8,6 @@ import com.xtwsoft.mapserver.global.Global;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xtwsoft.mapserver.file.FileData;
-import com.xtwsoft.mapserver.file.FileDataManager;
-import com.xtwsoft.mapserver.file.FileDataOfProject;
 import com.xtwsoft.mapserver.project.Project;
 
 @WebServlet("/file")
@@ -22,6 +20,7 @@ public class FileServlet extends BaseServlet {
 			return WebUtil.error("unknown project!");
 		}
 		Project project = Global.getInstance().getProject(projectName);
+		System.out.println("project name fromm params is "+projectName);
 		if(project == null) {
 			return WebUtil.error("can not find project:" + projectName);
 		} 
@@ -37,21 +36,22 @@ public class FileServlet extends BaseServlet {
 		} else if("md5sum".equals(action)){
 			String fileName = params.getValue("name");
 			String md5sum = MD5sum.getHash(project.fetchSourcePath().toString()+"/"+fileName, "MD5");
-			FileDataOfProject projectFileData = FileDataManager.getInstance().getFileDataManagerForProject(projectName);
 			
-			Object fileDataObject = projectFileData.getFileData(fileName);
+			Object fileDataObject = project.fetchFileDatas().fetchFileData(fileName);
 			if(fileDataObject instanceof JSONObject){
+				System.out.println("***********JSONObject ");
 				JSONObject fileDataJSON = (JSONObject)fileDataObject;
 				FileData fileData = (FileData)JSONObject.toJavaObject(fileDataJSON, FileData.class); 
 				fileData.setMd5Sum(md5sum);
-				projectFileData.addFileData(fileData);
+				project.fetchFileDatas().addFileData(fileData);
 			}else{
+				System.out.println("***********FileData Object");
 				FileData fileData = (FileData)fileDataObject;
 				fileData.setMd5Sum(md5sum);
-				projectFileData.addFileData(fileData);
+				project.fetchFileDatas().addFileData(fileData);
 			}
 			
-			projectFileData.writeFileDatasJson(new File(project.fetchProjectPath()+"/props","props.json"));
+			project.fetchFileDatas().writeFileDatasJson(project.fetchPropsJson());
 			return md5sum;
 
 			

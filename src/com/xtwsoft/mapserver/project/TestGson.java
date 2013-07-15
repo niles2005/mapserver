@@ -105,7 +105,7 @@ public class TestGson {
 	}
 	
 	public static void main(String[] args) {
-		new TestGson();
+//		new TestGson();
 	}
 
 }
