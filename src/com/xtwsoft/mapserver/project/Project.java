@@ -96,27 +96,8 @@ public class Project {
 		}
 		
 		if(m_projectPath != null && m_projectPath.exists()) {
-			FileDatas.buildFileDatas(this);
-//			m_sourcePath = new File(m_projectPath,"source");
-//			if(!m_sourcePath.exists()) {
-//				m_sourcePath.mkdir();
-//			}
-//			File propsPath = new File(m_projectPath,"props");
-//			if(!propsPath.exists()){
-//				propsPath.mkdir();
-//			}
-//			m_props = new File(propsPath, "props.json");
-//			if (!m_props.exists()) {
-//				fileDatas = new FileDatas(this);
-//				fileDatas.writeFileDatasJson(m_props);
-//			}else{
-//				try {
-//					fileDatas = fileData_mapper.readValue(m_props, FileDatas.class);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-			
+			fileDatas = FileDatas.buildFileDatas(this);
+		
 		}
 	}
 	
