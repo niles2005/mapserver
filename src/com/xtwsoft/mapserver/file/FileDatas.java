@@ -32,11 +32,16 @@ public class FileDatas {
 			if(!sourcePath.exists()) {
 				sourcePath.mkdir();
 			}
+<<<<<<< HEAD
 			File propsPath = new File(projectPath,"props");
 			if(!propsPath.exists()){
 				propsPath.mkdir();
 			}
 			File jsonFile = new File(propsPath, "props.json");
+=======
+			
+			File jsonFile = new File(projectPath, "props.json");
+>>>>>>> c881596ce276b64676346ea6d11fb1ae10485a5a
 			if (!jsonFile.exists()) {
 				fileDatas = new FileDatas();
 			}else{
@@ -94,9 +99,7 @@ public class FileDatas {
 		}
 	}
 	
-	public  synchronized void writeFileDatasJson(File propsPath){
-	}
-
+	
 	public String listFiles() {
 		try {
 			ObjectMapper mapper= new ObjectMapper();
