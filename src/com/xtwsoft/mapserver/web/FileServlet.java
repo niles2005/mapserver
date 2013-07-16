@@ -26,8 +26,6 @@ public class FileServlet extends BaseServlet {
 			return WebUtil.error("unknown action!");
 		}
 		
-		
-		
 		FileDatas fileDatas = project.fetchFileDatas();
 		if("list".equals(action)) {
 			return fileDatas.listFiles();
