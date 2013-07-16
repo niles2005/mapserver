@@ -32,7 +32,7 @@ public class FileDatas {
 			if(!sourcePath.exists()) {
 				sourcePath.mkdir();
 			}
-			File propsPath = new File(sourcePath,"props");
+			File propsPath = new File(projectPath,"props");
 			if(!propsPath.exists()){
 				propsPath.mkdir();
 			}

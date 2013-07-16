@@ -96,7 +96,7 @@ public class Project {
 		}
 		
 		if(m_projectPath != null && m_projectPath.exists()) {
-			FileDatas.buildFileDatas(this);
+			fileDatas = FileDatas.buildFileDatas(this);
 //			m_sourcePath = new File(m_projectPath,"source");
 //			if(!m_sourcePath.exists()) {
 //				m_sourcePath.mkdir();
