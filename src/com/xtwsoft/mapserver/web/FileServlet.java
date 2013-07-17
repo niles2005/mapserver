@@ -36,6 +36,10 @@ public class FileServlet extends BaseServlet {
 		} else if("md5sum".equals(action)){
 			String fileName = params.getValue("name");
 			return fileDatas.buildFileMD5(fileName);
+		} else if("propsupdate".equals(action)){
+			if (fileDatas.propsFileUpdate()) {
+				return fileDatas.listFiles();
+			}
 		}
 		return null;
 	}

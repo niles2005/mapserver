@@ -52,6 +52,32 @@ public class FileDatas {
 		return fileDatas;
 	}
 	
+	public boolean propsFileUpdate(){
+		File projectPath = m_project.fetchProjectPath();
+		if(projectPath != null && projectPath.exists()) {
+			File sourcePath = new File(projectPath,"source");
+			int fileCount = fileMap.size();
+			if(sourcePath.isDirectory()){
+				 File [] uploadedFiles = sourcePath.listFiles();
+				 for (File file: uploadedFiles){
+					 String fileName = file.getName();
+					 FileData fileData = fileMap.get(fileName);
+					 if(fileData == null){
+						 fileData = new FileData(fileName,file.length());
+						 fileData.setCreateTime(file.lastModified());
+						 fileMap.put(fileName, fileData);
+					 }
+				 }
+			}
+			if (fileCount < fileMap.size()) {
+				this.savePropFile();
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Project fetchProject() {
 		return this.m_project;
 	}
