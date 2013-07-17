@@ -2,8 +2,6 @@ package com.xtwsoft.mapserver.project;
 
 import java.io.File;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import com.alibaba.fastjson.JSON;
 import com.xtwsoft.mapserver.file.FileDatas;
 
@@ -19,7 +17,6 @@ public class Project {
 	private String info;
 	private Module module = new Module();
 	private FileDatas fileDatas;
-	private static ObjectMapper fileData_mapper= new ObjectMapper();
 	
 	public Module fetchModule() {
 		return module;
@@ -86,8 +83,6 @@ public class Project {
 	}
 	
 	private File m_projectPath = null;
-//	private File m_sourcePath = null;
-//	private File m_props = null;
 	public void doInit(File projectsPath) {
 		if(m_projectPath == null || !m_projectPath.exists()) {
 			m_projectPath = new File(projectsPath,this.name);
@@ -97,7 +92,6 @@ public class Project {
 		
 		if(m_projectPath != null && m_projectPath.exists()) {
 			fileDatas = FileDatas.buildFileDatas(this);
-		
 		}
 	}
 	
